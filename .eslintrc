@@ -1,0 +1,26 @@
+{
+  "env": {
+    "node": true
+//    "es6": true
+  },
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-console": "off",
+    "semi": "off",
+    "class-methods-use-this": "off",
+    "default-case": "off",
+    "consistent-return": "off",
+    "import/no-import-module-exports": "off",
+    "max-classes-per-file": "off",
+    "no-return-await": "off",
+    "no-underscore-dangle": "off"
+  },
+  "plugins": [
+    "prettier"
+  ]
+}
