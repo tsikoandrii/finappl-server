@@ -34,7 +34,7 @@ router.get('/refresh', async (req, res, next) => {
     .catch(next)
 })
 
-router.post('/reset', async (req, res, next) => {
+router.post('/reset', validate('createResetLink'), async (req, res, next) => {
   await createResetLink(req)
     .then((data) => {
       return res.json(data)
@@ -42,7 +42,7 @@ router.post('/reset', async (req, res, next) => {
     .catch(next)
 })
 
-router.put('/reset/:id', async (req, res, next) => {
+router.put('/reset/:id', validate('reset'), async (req, res, next) => {
   await reset(req, res)
     .then((data) => {
       return res.json(data)
@@ -51,6 +51,10 @@ router.put('/reset/:id', async (req, res, next) => {
 })
 
 router.get('/test', async (req, res) => {
+  return res.send(req.ipInfo)
+})
+
+router.get('/test/:id', async (req, res) => {
   return res.send(req.ipInfo)
 })
 

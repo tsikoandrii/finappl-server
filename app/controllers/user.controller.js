@@ -92,6 +92,16 @@ const validate = (method) => {
           .exists()
           .isLength({ min: 6 }),
       ])
+
+    case 'reset':
+      return validateExpander([
+        body('password', 'Пароль має бути більше 6 символів')
+          .exists()
+          .isLength({ min: 6 }),
+      ])
+
+    case 'createResetLink':
+      return validateExpander([body('email', 'Некорректний e-mail').exists()])
   }
 }
 
