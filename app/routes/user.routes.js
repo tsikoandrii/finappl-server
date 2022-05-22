@@ -1,5 +1,12 @@
 import express from 'express'
-import { register, login, validate } from '../controllers/user.controller'
+import {
+  register,
+  login,
+  refreshToken,
+  createResetLink,
+  reset,
+  validate,
+} from '../controllers/user.controller'
 
 const router = express.Router()
 
@@ -13,6 +20,30 @@ router.post('/', validate('register'), async (req, res, next) => {
 
 router.post('/login', validate('register'), async (req, res, next) => {
   await login(req, res)
+    .then((data) => {
+      return res.json(data)
+    })
+    .catch(next)
+})
+
+router.get('/refresh', async (req, res, next) => {
+  await refreshToken(req)
+    .then((data) => {
+      return res.json(data)
+    })
+    .catch(next)
+})
+
+router.post('/reset', async (req, res, next) => {
+  await createResetLink(req)
+    .then((data) => {
+      return res.json(data)
+    })
+    .catch(next)
+})
+
+router.put('/reset/:id', async (req, res, next) => {
+  await reset(req, res)
     .then((data) => {
       return res.json(data)
     })

@@ -1,7 +1,7 @@
 import TokenService from '../services/token.service'
 import { ClientError } from '../helpers/error-types'
 
-const unprotectedRoutes = ['/api', '/api/login']
+const unprotectedRoutes = ['/api', '/api/login', '/api/refresh', '/api/reset']
 
 export default (req, res, next) => {
   const { authorization } = req.headers
