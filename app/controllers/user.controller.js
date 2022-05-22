@@ -3,6 +3,7 @@ import User from '../db/models/User'
 import validateExpander from '../helpers/validate-expander'
 import { ClientError } from '../helpers/error-types'
 import TokenService from '../services/token.service'
+import LinkService from '../services/link.service'
 
 const register = async (req, res, next) => {
   const { email, password } = req.body
@@ -49,6 +50,38 @@ const login = async (req, res, next) => {
   return { access }
 }
 
+const createResetLink = async (req) => {
+  const { email } = req.body
+
+  const user = await User.findOne({ email })
+  if (!user) throw new ClientError('Користувача не існує')
+
+  return LinkService.createResetLink(user._id)
+}
+
+const reset = async (req, res) => {
+  const { id } = req.params
+  const { password } = req.body
+
+  const user = await User.findOne({ resetId: id })
+  if (!user) throw new ClientError('Посилання не існує')
+
+  user.password = password
+  user.resetId = ''
+  await user.save()
+
+  const { access, refresh } = await TokenService.createToken(user)
+  res.cookie('refresh', refresh)
+
+  return { access }
+}
+
+const refreshToken = async (req) => {
+  const { refresh } = req.cookies
+  const { user } = await TokenService.verifyToken(refresh)
+  return { access: await TokenService.generateToken(user) }
+}
+
 // validate
 const validate = (method) => {
   switch (method) {
@@ -59,7 +92,17 @@ const validate = (method) => {
           .exists()
           .isLength({ min: 6 }),
       ])
+
+    case 'reset':
+      return validateExpander([
+        body('password', 'Пароль має бути більше 6 символів')
+          .exists()
+          .isLength({ min: 6 }),
+      ])
+
+    case 'createResetLink':
+      return validateExpander([body('email', 'Некорректний e-mail').exists()])
   }
 }
 
-export { register, login, validate }
+export { register, login, refreshToken, createResetLink, reset, validate }

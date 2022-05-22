@@ -20,6 +20,9 @@ const UserSchema = new Schema(
     hashedPassword: {
       type: 'String',
     },
+    resetId: {
+      type: String,
+    },
   },
   { timestamps: true }
 )
