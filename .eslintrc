@@ -18,7 +18,8 @@
     "import/no-import-module-exports": "off",
     "max-classes-per-file": "off",
     "no-return-await": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off"
   },
   "plugins": [
     "prettier"

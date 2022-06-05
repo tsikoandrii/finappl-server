@@ -25,8 +25,8 @@ export default (req, res, next) => {
 
   if (!token) throw new ClientError('Немає авторизації', 403)
 
-  const result = TokenService.verifyToken(token).catch(next)
+  const result = TokenService.verifyToken(token)
 
-  req.user = result.user
+  req.user = result.data._id
   return next()
 }
