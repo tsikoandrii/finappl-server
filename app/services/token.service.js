@@ -22,7 +22,6 @@ class TokenService {
   }
 
   verifyToken(token) {
-    console.log(token)
     try {
       return jwt.verify(token, SECRET)
     } catch (err) {

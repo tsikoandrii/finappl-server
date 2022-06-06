@@ -1,7 +1,5 @@
 import mongoose from 'mongoose'
 
-import Operation from './Operation'
-
 const { Schema, ObjectId, model } = mongoose
 
 const AccountSchema = new Schema(
@@ -14,7 +12,7 @@ const AccountSchema = new Schema(
       ref: 'User',
     },
     name: {
-      type: String,
+      type: 'String',
       required: true,
     },
     balance: {
