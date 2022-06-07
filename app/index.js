@@ -3,7 +3,6 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import config from 'config'
 import expressIP from 'express-ip'
-import RedisService from './services/redis.service'
 
 import db from './db'
 import routes from './routes'

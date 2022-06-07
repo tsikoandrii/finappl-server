@@ -17,7 +17,7 @@ class TokenService {
     return { refresh: token.refresh, access: await this.generateToken(user) }
   }
 
-  async generateToken(payload, expiresIn = '1s') {
+  async generateToken(payload, expiresIn = '24h') {
     return await jwt.sign({ data: payload }, SECRET, { expiresIn })
   }
 
@@ -25,7 +25,6 @@ class TokenService {
     try {
       return jwt.verify(token, SECRET)
     } catch (err) {
-      console.log(err)
       throw new AuthorizationError(
         'Немає авторизації',
         'Помилка верифікації токена'

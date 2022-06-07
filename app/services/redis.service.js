@@ -2,8 +2,10 @@ import { createClient } from 'redis'
 
 class RedisService {
   constructor() {
-    this.client = createClient()
-    this.client.on('error', (err) => console.log('Redis Client Error', err))
+    global.REDIS_CLIENT = createClient()
+    global.REDIS_CLIENT.on('error', (err) =>
+      console.log('Redis Client Error', err)
+    )
     this.connect().catch((err) => console.log(err))
   }
 

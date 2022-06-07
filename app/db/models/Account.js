@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const { Schema, ObjectId, model } = mongoose
 
-const TokenSchema = new Schema(
+const AccountSchema = new Schema(
   {
     id: {
       type: ObjectId,
@@ -12,19 +12,31 @@ const TokenSchema = new Schema(
       ref: 'User',
     },
     name: {
-      type: String,
+      type: 'String',
       required: true,
+    },
+    balance: {
+      type: 'Number',
+      default: 0,
     },
     currency: {
       type: 'String',
-      default: 'UAN',
+      default: 'uah',
+    },
+    operations: [
+      {
+        type: ObjectId,
+        ref: 'Operation',
+      },
+    ],
+    theme: {
+      background: {
+        type: 'String',
+        default: 'black',
+      },
     },
   },
   { timestamps: true }
 )
 
-TokenSchema.methods = {}
-
-TokenSchema.virtual('password')
-
-export default model('Token', TokenSchema)
+export default model('Account', AccountSchema)

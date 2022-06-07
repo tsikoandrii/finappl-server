@@ -2,5 +2,9 @@
   "PORT": "8000",
   "MONGO_URI": "mongodb://127.0.0.1:27017/finappl-dev",
   "SECRET": "S3dL23d",
-  "CURRENCY_API_KEY": "fcd13429fec7b345485f54d4beabdc77"
+  "CURRENCY_API_KEY": "fcd13429fec7b345485f54d4beabdc77",
+  "OPERATION_TYPES": [
+    "earnings",
+    "spending"
+  ]
 }
