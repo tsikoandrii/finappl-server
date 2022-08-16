@@ -15,4 +15,6 @@ class AuthorizationError extends Error {
   }
 }
 
+console.log('test')
+
 export { ClientError, AuthorizationError }
