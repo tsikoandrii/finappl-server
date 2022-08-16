@@ -28,7 +28,9 @@ app.use('/api', routes)
 
 app.use(ErrorHandler)
 
+console.log('test')
+
 // Start application
-app.listen(PORT, () => {
+app.listen(80, () => {
   console.log(`Application has been started on http://localhost:${PORT}`)
 })
